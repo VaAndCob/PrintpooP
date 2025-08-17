@@ -1,3 +1,4 @@
+![](https://github.com/VaAndCob/PrintpooP/blob/main/hardware/ESP32_2.4TFT_diagram.jpeg)
 ![](hw1.jpg)
 ![](hw2.jpg)
 ![](hw3.jpg)
