@@ -10,5 +10,5 @@
 ![](mpu6050.jpg)
 # [Buy->MPU6050](https://s.click.aliexpress.com/e/_oF7jqOa)
 
-# JST 1.25 Female 4 Pin
 ![JST 1.25 Female 4 Pin](JST1.25Female4Pin.jpg)
+# [Buy->JST 1.25 Female 4 Pin](https://s.click.aliexpress.com/e/_onDQEwb)
