@@ -146,12 +146,13 @@ void setup() {
 
   touch_calibrate();  //press RESET then press & hold BOOT button for a second (GPIO0) to manually enter calibration
 
-  // LVGL display buffers
-  static lv_color_t buf1[TFT_WIDTH * 40];  // Buffer for 40 rows (~19.2 KB)
-  static lv_color_t buf2[TFT_WIDTH * 40];  // Optional second buffer for double-buffering
-  static lv_disp_draw_buf_t draw_buf;
   lv_init();
-  lv_disp_draw_buf_init(&draw_buf, buf1, buf2, TFT_WIDTH * 40);  // 40 rows buffered
+  // LVGL display buffers
+  static lv_color_t buf1[TFT_WIDTH * TFT_HEIGHT /6];  // Buffer for 40 rows (~19.2 KB)
+  static lv_color_t buf2[TFT_WIDTH * TFT_HEIGHT /6];  // Optional second buffer for double-buffering
+  static lv_disp_draw_buf_t draw_buf;
+
+  lv_disp_draw_buf_init(&draw_buf, buf1, buf2, TFT_WIDTH * TFT_HEIGHT /6);  // 40 rows buffered
 
   // Register display driver
   static lv_disp_drv_t disp_drv;
