@@ -1,15 +1,9 @@
 # PrintpooP – Retro Pixel Smart Display for Bambu Lab A1
-## WORK BOTH 2.4" and 2.8" Resistive Touch Screen
-## Firmware version: 1.5.0 (display on the top left-most on the welcome screen)
-
-Important Notice:
-
-Heads up! This firmware is still a work in progress
-It's not officially released yet, so things might break or not work as expected.
-We’re working hard to get it ready — thanks for your understanding!
-
-- [Flash Firmware Online for 2.4" and 2.8"](https://vaandcob.github.io/webpage/src/index.html)
+- WORK BOTH 2.4" and 2.8" Resistive Touch Screen
+- Firmware version: 1.5.0 (display on the top left-most on the welcome screen)
 - [Version history](https://github.com/VaAndCob/PrintpooP/blob/main/CHANGELOG.md)
+## Quick start, flash and go, no code needed
+- [Flash Firmware Online for 2.4" and 2.8"](https://vaandcob.github.io/webpage/src/index.html)
 --------------------------  
 🎬[Watch on Youtube](https://www.youtube.com/playlist?list=PLtzfxJvwUDCUxc5Is3-2UeWByNE8M8oDE)
 
@@ -81,6 +75,7 @@ Commercial use is strictly prohibited. For licensing inquiries, contact [Va&Cob]
 
 ---------------------------------------------------------------------------------------------------
 [![Buy Me a Coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=☕&slug=vaandcob&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff)](https://www.buymeacoffee.com/vaandcob)
+
 
 
 
