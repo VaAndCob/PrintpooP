@@ -84,7 +84,7 @@ public:
       cfg.pin_int = 36;
 
 #ifdef USE_CYD_24  // CYD 2.4" touch
-      cfg.offset_rotation = 1;
+      cfg.offset_rotation = 3;
       cfg.spi_host = HSPI_HOST;  // Touch controller is on the HSPI bus
       cfg.pin_sclk = -1;         //share with lcd
       cfg.pin_mosi = -1;         //share with lcd
