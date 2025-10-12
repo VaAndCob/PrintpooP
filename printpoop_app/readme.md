@@ -2,11 +2,11 @@
 
 This guide provides instructions on how to set up your environment and compile the source code for the PrintPooP project.
 
-## 0. Add an additional Partition Scheme
+## 1. Add an additional Partition Scheme
 
 https://github.com/VaAndCob/PrintpooP/blob/main/printpoop_app/addon/partitions/readme.md
 
-## 1. Prerequisites & Setup
+## 2. Prerequisites & Setup
 
 Ensure your environment matches the following requirements:
 
@@ -26,14 +26,15 @@ Ensure your environment matches the following requirements:
 
 ---
 
-## 2. Configure the `lvgl` Library
+## 3. Configure the `lvgl` Library
 
-copy `lv_config.h` from addon folder into arduino library folder `<username>\Arduino\sketch\libraries`
+**Copy `lv_config.h`** from addon folder into arduino library folder **`<username>\Arduino\Sketch\libraries`**
 
+---
 
-## 3. Select Target Screen Size for Compilation
+## 4. Select Target Screen Size for Compilation
 
-2.  **Edit `printpoop_app.ino`** (your main sketch file):
+**Edit `printpoop_app.ino`** (your main sketch file):
     * Go to approximately line 29 in `printpoop_app.ino`and set macro is defined (uncommented):
  
         ```cpp
@@ -44,7 +45,7 @@ copy `lv_config.h` from addon folder into arduino library folder `<username>\Ard
 
 ---
 
-## 4. Compile and Upload
+## 5. Compile and Upload
 
 After completing the above steps:
 

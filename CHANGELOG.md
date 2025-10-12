@@ -1,4 +1,9 @@
 ## Version history
+
+### 1.5.0 (Oct 10th, 2025)
+- Replace TFT_eSPI library to LovyanGFX library for easy configuration
+- Disable brownout detection to prevent randomly reset when the ESP32 attemp to connect to WiFi implemented
+- SD Card implemented for user custom image replacement in the future release.
 ### 1.4.6
 - Add printing layer label
 ### 1.4.5
