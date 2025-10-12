@@ -7,7 +7,7 @@ Important Notice:
 Heads up! This firmware is still a work in progress
 It's not officially released yet, so things might break or not work as expected.
 We’re working hard to get it ready — thanks for your understanding!
-- Develop progress: ████████▒▒ 80%
+
 - [Flash Firmware Online for 2.4" and 2.8"](https://vaandcob.github.io/webpage/src/index.html)
 - [Version history](https://github.com/VaAndCob/PrintpooP/blob/main/CHANGELOG.md)
 --------------------------  
@@ -81,6 +81,7 @@ Commercial use is strictly prohibited. For licensing inquiries, contact [Va&Cob]
 
 ---------------------------------------------------------------------------------------------------
 [![Buy Me a Coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=☕&slug=vaandcob&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff)](https://www.buymeacoffee.com/vaandcob)
+
 
 
 
