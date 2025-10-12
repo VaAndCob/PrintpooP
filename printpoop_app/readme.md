@@ -19,84 +19,27 @@ Ensure your environment matches the following requirements:
     https://github.com/VaAndCob/PrintpooP/tree/main/printpoop_app/addon/partitions
 
 * **Required Libraries:**
-    * `TFT_eSPI 2.5.43`
+    * `lovyanGFX 1.2.7`
     * `lvgl 8.3.11`
     * *(And any other libraries specified as needed by the sketch)*
     * **Action:** Ensure all necessary libraries are installed in your Arduino IDE.
 
 ---
 
-## 2. Configure the `TFT_eSPI` Library
+## 2. Configure the `lvgl` Library
 
-These steps configure the `TFT_eSPI` library specifically for the CYD display.
+copy `lv_config.h` from addon folder into arduino library folder `<username>\Arduino\sketch\libraries`
 
-**A. Backup Existing `User_Setup_Select.h` (Important!)**
-
-   Before proceeding, it's highly recommended to back up your current `User_Setup_Select.h` file if you use `TFT_eSPI` for other projects.
-   * Locate the file, typically at: `C:\Users\{YourUsername}\Documents\Arduino\libraries\TFT_eSPI\User_Setup_Select.h` (Windows) or `~/Documents/Arduino/libraries/TFT_eSPI/User_Setup_Select.h` (macOS/Linux). The exact path might vary based on your sketchbook location.
-
-**B. Copy Provided `TFT_eSPI` Configuration Files:**
-
-1.  **Copy `User_Setup_Select.h`:**
-    * Copy the `User_Setup_Select.h` file provided with *this project* into your `TFT_eSPI` library folder, overwriting the existing one.
-    * Example path: `C:\Users\{YourUsername}\Documents\Arduino\libraries\TFT_eSPI\`
-
-2.  **Copy `User_Setups` Files:**
-    * Copy the `Setup_CYD_24.h` and `Setup_CYD_28_1.h` and `Setup_CYD_28_2.h` files (provided with *this project* in a `User_Setups` folder or similar) into the `User_Setups` subfolder within your `TFT_eSPI` library.
-    * Example path: `C:\Users\{YourUsername}\Documents\Arduino\libraries\TFT_eSPI\User_Setups\`
-
----
 
 ## 3. Select Target Screen Size for Compilation
 
-You need to configure the project for either a 2.4" or 2.8" screen by editing two files: `User_Setup_Select.h` (within the `TFT_eSPI` library folder) and `printpoop_app.ino` (your main sketch file).
-
-### For a 2.4" Screen
-
-1.  **Edit `User_Setup_Select.h`** (in your `TFT_eSPI` library folder):
-    * Ensure the following lines are set:
-        ```cpp
-        #include <User_Setups/Setup_CYD_24.h> // Active
-        //#include <User_Setups/Setup_CYD_28_1.h> // Commented out
-        //#include <User_Setups/Setup_CYD_28_2.h> // Commented out
-        ```
-
 2.  **Edit `printpoop_app.ino`** (your main sketch file):
-    * Go to approximately line 25 and make sure the `USE_TFT_28` macro is commented out:
+    * Go to approximately line 29 in `printpoop_app.ino`and set macro is defined (uncommented):
+ 
         ```cpp
-        // #define USE_TFT_28 // Should be commented out for 2.4" screen
-        ```
-
-### For a 2.8" Screen Variant 1
-
-1.  **Edit `User_Setup_Select.h`** (in your `TFT_eSPI` library folder):
-    * Ensure the following lines are set:
-        ```cpp
-        //#include <User_Setups/Setup_CYD_24.h> // Commented out
-        #include <User_Setups/Setup_CYD_28_1.h> // Active
-        //#include <User_Setups/Setup_CYD_28_2.h> // Commented out
-        ```
-
-2.  **Edit `printpoop_app.ino`** (your main sketch file):
-    * Go to approximately line 25 and make sure the `USE_TFT_28` macro is defined (uncommented):
-        ```cpp
-        #define USE_TFT_28 // Should be active for 2.8" screen
-        ```
-
-### For a 2.8" Screen Variant 2 Randomnerd
-
-1.  **Edit `User_Setup_Select.h`** (in your `TFT_eSPI` library folder):
-    * Ensure the following lines are set:
-        ```cpp
-        //#include <User_Setups/Setup_CYD_24.h> // Commented out
-        //#include <User_Setups/Setup_CYD_28_1.h> // Active
-        #include <User_Setups/Setup_CYD_28_2.h> // Commented out
-        ```
-
-2.  **Edit `printpoop_app.ino`** (your main sketch file):
-    * Go to approximately line 25 and make sure the `USE_TFT_28` macro is defined (uncommented):
-        ```cpp
-        #define USE_TFT_28 // Should be active for 2.8" screen
+        #define USE_CYD_24      //for CYD 2.4"
+        #define USE_CYD_28_1     //for CYD 2.8" Variant 1
+        #define USE_CYD_28_2    //for CYD 2.8" Variant 2
         ```        
 
 ---

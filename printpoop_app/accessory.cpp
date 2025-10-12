@@ -102,7 +102,7 @@ void autoDim() {
     if (low_count > 10) {
       low_count = 10;  //low amb light 10 times count
       if (!dim) {
-        ledcWrite(backlightChannel, 50);  //dim light
+         tft.setBrightness(50);  //dim light
         dim = true;
       }  //if !dim
     }    //if low_count
@@ -113,7 +113,7 @@ void autoDim() {
     if (high_count > 10) {
       high_count = 10;  //high amb light 10 times count
       if (dim) {
-        ledcWrite(backlightChannel, 200);  //brightest
+        tft.setBrightness(200);
         dim = false;
       }  //if dim
     }    //if high_count
@@ -319,3 +319,10 @@ void print_animation() {
     }
   }
 }
+//----------------------------------
+// Init SD CARD
+SPIClass sd_hspi(HSPI);  // Initialize a new SPIClass object for the SD card.
+void initSDCard() {
+  sd_hspi.begin(SD_SCK, SD_MISO, SD_MOSI, SD_CS);
+}
+//-----------------------------------------

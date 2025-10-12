@@ -1,12 +1,18 @@
 #pragma once
 
 #include <Arduino.h>
-/*
-struct mytime {
-  uint8_t h, m, s;
-}; 
-extern mytime currentTime;
-*/
+#include "LGFX_CYD.h"
+
+#include <SPI.h>
+#include <FS.h>
+#include <SD.h>
+#define SD_MOSI 23
+#define SD_MISO 19
+#define SD_SCK 18
+#define SD_CS 5
+
+extern LGFX tft; /* LGFX instance */
+extern SPIClass sd_hspi;  // Using HSPI_HOST, as VSPI is often used by displays.
 
 extern bool print_started;
 extern bool print_swing_now;
@@ -32,3 +38,4 @@ bool newFirmwareAvailable();
 /*-----------------------------*/
 void mpu_init(byte sda,byte scl);
 void print_animation();
+void initSDCard();

@@ -1,4 +1,4 @@
-/**
+/** PRINTPOOP
  * @file lv_conf.h
  * Configuration file for v8.3.0-dev
  */
@@ -329,12 +329,12 @@
 #define LV_FONT_MONTSERRAT_10 0
 #define LV_FONT_MONTSERRAT_12 1
 #define LV_FONT_MONTSERRAT_14 1
-#define LV_FONT_MONTSERRAT_16 0
+#define LV_FONT_MONTSERRAT_16 1
 #define LV_FONT_MONTSERRAT_18 0
 #define LV_FONT_MONTSERRAT_20 0
 #define LV_FONT_MONTSERRAT_22 1
 #define LV_FONT_MONTSERRAT_24 0
-#define LV_FONT_MONTSERRAT_26 0
+#define LV_FONT_MONTSERRAT_26 1
 #define LV_FONT_MONTSERRAT_28 0
 #define LV_FONT_MONTSERRAT_30 0
 #define LV_FONT_MONTSERRAT_32 0
@@ -446,7 +446,7 @@
 
 #define LV_USE_CHECKBOX   0
 
-#define LV_USE_DROPDOWN   0   /*Requires: lv_label*/
+#define LV_USE_DROPDOWN   1   /*Requires: lv_label*/
 
 #define LV_USE_IMG        1   /*Requires: lv_label*/
 
@@ -463,9 +463,9 @@
     #define LV_ROLLER_INF_PAGES 7 /*Number of extra "pages" when the roller is infinite*/
 #endif
 
-#define LV_USE_SLIDER     0   /*Requires: lv_bar*/
+#define LV_USE_SLIDER     1  /*Requires: lv_bar*/
 
-#define LV_USE_SWITCH     0
+#define LV_USE_SWITCH     1
 
 #define LV_USE_TEXTAREA   1   /*Requires: lv_label*/
 #if LV_USE_TEXTAREA != 0
@@ -501,7 +501,7 @@
 
 #define LV_USE_IMGBTN     0
 
-#define LV_USE_KEYBOARD   0
+#define LV_USE_KEYBOARD   1
 
 #define LV_USE_LED        1
 
@@ -513,7 +513,7 @@
 
 #define LV_USE_MSGBOX     1
 
-#define LV_USE_SPINBOX    0
+#define LV_USE_SPINBOX    1
 
 #define LV_USE_SPINNER    1
 

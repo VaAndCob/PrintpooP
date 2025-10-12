@@ -1,55 +1,38 @@
 /**
- * @file printpoop_app.ino
- * @author Va&Cob
- * @date 2025-05-01
- * @copyright Copyright (c) 2025 Va&Cob
- *
- * Hardware: CYD 2.4" ESP32 Dev Board
- * IDE: Arduino IDE 2.3.6
- * ESP32 Core: 2.0.7
- * Partition scheme: Max App Only (3.9MB)
+ @file printpoop_app.ino
+ @author Va&Cob
+ @date 2025-05-01
+ @copyright Copyright (c) 2025 Va&Cob
+ 
+ # Hardware: CYD 2.4" /2.8" ESP32 Dev Module
+ # Arduino IDE 2.3.6
+ # ESP32 Core: 2.0.7
+ # 
+ # Partition scheme: Max App Only (3.9MB)
 **/
 
-//------ Use 2.4" or 2.8" ----------------
-/*
-# to use 2.4" screen -> Edit "User_Setup_Select.h"
-#include <User_Setups/Setup_CYD_24.h>
-//#include <User_Setups/Setup_CYD_28_1.h>
-//#include <User_Setups/Setup_CYD_28_2.h>
+// === Uncomment the CYD model you want to compile =====
 
-# to use 2.8" screen Variant 1 -> Edit "User_Setup_Select.h"
-//#include <User_Setups/Setup_CYD_24.h>
-#include <User_Setups/Setup_CYD_28_1.h>
-//#include <User_Setups/Setup_CYD_28_2.h>
+#define USE_CYD_24      //for CYD 2.4"
+//#define USE_CYD_28_1      //for CYD 2.8" Variant 1
+//#define USE_CYD_28_2    //for CYD 2.8" Variant 2
 
-# to use 2.8" screen Variant 2 (Randomnerd) -> Edit "User_Setup_Select.h"
-//#include <User_Setups/Setup_CYD_24.h>
-//#include <User_Setups/Setup_CYD_28_1.h>
-#include <User_Setups/Setup_CYD_28_2.h>
-
-*/
+//-------------------------------------------------------
 #include <Arduino.h>
-//-------------------------------------------------------
-const String version = "1.4.6";
+const String version = "1.5.0";
 const String compile_date = __DATE__ " - " __TIME__;
-
-#define USE_TFT_28  //comment out this line to use CYD2.4"
 //-------------------------------------------------------
-
-extern "C" {
+#include "soc/soc.h"          // Disable brownout problems
+#include "soc/rtc_cntl_reg.h" // Disable brownout problems
 #include "freertos/FreeRTOS.h"
 #include "freertos/timers.h"
 #include <freertos/task.h>
 #include <freertos/semphr.h>
-}
 
 #include <ArduinoJson.h>
 #include <SPI.h>
-
-#define LV_CONF_INCLUDE_SIMPLE 1  // Tell LVGL to look for custom lv_conf.
-#include "lv_conf.h"              // Include your custom configuration FIRST before lvgl.h
 #include "lvgl.h"
-#include <TFT_eSPI.h>  // Setup_CYD_2_4.h
+#include "LGFX_CYD.h"
 #include "ui.h"
 
 //Pin configuration
@@ -59,15 +42,18 @@ extern "C" {
 #define LED_GREEN 16
 #define LED_BLUE 17
 
+#define TFT_WIDTH 240
+#define TFT_HEIGHT 320
+
 // SOUNDER and RTC
 #include "accessory.h"
 #include "mqtt.h"
 #include "nes_audio.h"
 
-TFT_eSPI tft = TFT_eSPI(TFT_HEIGHT, TFT_WIDTH); /* TFT instance */
+LGFX tft; /* LGFX instance */
 
 //---------------
-#include "touch.h"
+
 
 /* Display flushing */
 void my_disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_t *color_p) {
@@ -75,29 +61,27 @@ void my_disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_t *c
   uint32_t h = (area->y2 - area->y1 + 1);
   tft.startWrite();
   tft.setAddrWindow(area->x1, area->y1, w, h);
-  tft.pushColors((uint16_t *)&color_p->full, w * h, true);
+  tft.pushPixels((uint16_t *)&color_p->full, w * h, true);
   tft.endWrite();
   lv_disp_flush_ready(disp_drv);
 }
 /* Touch pad callback */
 void my_touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data) {
   uint16_t touchX, touchY;
-  bool touched = getTouch(&touchX, &touchY);
-  if (!touched) {
-    data->state = LV_INDEV_STATE_REL;
-  } else {
+  bool touched = tft.getTouch(&touchX, &touchY);
+
+  if (touched) {
     data->state = LV_INDEV_STATE_PR;
-    /*Set the coordinates*/
     data->point.x = touchX;
     data->point.y = touchY;
-#ifdef SERIAL_DEBUG
-    Serial.printf("%d - %d\n", touchX, touchY);
-#endif
+  } else {
+    data->state = LV_INDEV_STATE_REL;
   }
 }
 
 //------------------------------------------------------
 void setup() {
+  WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0);//disable brownout detection
   //init communication
   Serial.begin(115200);
   delay(500);
@@ -107,18 +91,18 @@ void setup() {
   Serial.println(compile_date);
 
 
-#ifdef USE_TFT_28
-#define ROTATION 2
-#define SDA_PIN 27
-#define SCL_PIN 22
-  GAIN = 2.0;//speaker volume (recommend connect AMP IC pin 4 and 5 with R 1K ohm)
-  setVersion(version, "printpoop28_1_manifest.json");
-#else
-#define ROTATION 1
-#define SDA_PIN 21
-#define SCL_PIN 22
-  GAIN = 5.0;//speaker volume
+#ifdef USE_CYD_24  //CYD 2.4"
+  #define ROTATION 4 //rotate + flip
+  #define SDA_PIN 21
+  #define SCL_PIN 22
+  GAIN = 5.0;  //speaker volume
   setVersion(version, "printpoop24_manifest.json");
+#else  //all CYD 2.8" variants
+  #define ROTATION 0
+  #define SDA_PIN 27
+  #define SCL_PIN 22
+  GAIN = 2.0;  //speaker volume (recommend connect AMP IC pin 4 and 5 with R 1K ohm)
+  setVersion(version, "printpoop28_1_manifest.json");
 #endif
 
   //pin configuration
@@ -132,27 +116,27 @@ void setup() {
   digitalWrite(LED_GREEN, HIGH);
   digitalWrite(LED_BLUE, HIGH);
 
-  mpu_init(SDA_PIN, SCL_PIN);// init MPU6050
+  mpu_init(SDA_PIN, SCL_PIN);  // init MPU6050
 
   //init TFT
   tft.begin();
   tft.setRotation(ROTATION);  //Portrait
-  init_TFT_BL(TFT_BL);        // attach backlight after tft.begin
+  tft.setBrightness(200);
 
-  //init touch
-  touchscreenSPI.begin(TOUCH_CLK, TOUCH_MISO, TOUCH_MOSI, TOUCH_CS);
-  ts.begin(touchscreenSPI);
-  ts.setRotation(ROTATION);
+  //screen calibration
+  if (digitalRead(SELECTOR_PIN) == LOW) {
+    uint16_t calData[8];
+    tft.calibrateTouch(calData, TFT_WHITE, TFT_BLACK, 15);
+  }
 
-  touch_calibrate();  //press RESET then press & hold BOOT button for a second (GPIO0) to manually enter calibration
 
   lv_init();
   // LVGL display buffers
-  static lv_color_t buf1[TFT_WIDTH * TFT_HEIGHT /6];  // Buffer for 40 rows (~19.2 KB)
-  static lv_color_t buf2[TFT_WIDTH * TFT_HEIGHT /6];  // Optional second buffer for double-buffering
   static lv_disp_draw_buf_t draw_buf;
-
-  lv_disp_draw_buf_init(&draw_buf, buf1, buf2, TFT_WIDTH * TFT_HEIGHT /6);  // 40 rows buffered
+  // Allocate buffer for 1/6 of the screen size
+  static lv_color_t buf1[TFT_WIDTH * TFT_HEIGHT / 6];
+  static lv_color_t buf2[TFT_WIDTH * TFT_HEIGHT / 6];
+  lv_disp_draw_buf_init(&draw_buf, buf1, buf2, TFT_WIDTH * TFT_HEIGHT / 6);
 
   // Register display driver
   static lv_disp_drv_t disp_drv;
@@ -172,13 +156,12 @@ void setup() {
 
   ui_init();
 
- // lv_label_set_text(ui_status_label_printstage,"Idle"); //test swing
+  // lv_label_set_text(ui_status_label_printstage,"Idle"); //test swing
 }
 
 //------------------------------------------------------
 void loop() {
 
-  lv_timer_handler();
   autoDim();
   wm.process();
   wifi_status();
@@ -186,5 +169,7 @@ void loop() {
   update_clock();
   idle_animation();
   print_animation();
+
+  lv_task_handler();
 }
 //------------------------------------------------------
