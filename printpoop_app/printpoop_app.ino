@@ -13,8 +13,8 @@
 
 // === Uncomment the CYD model you want to compile =====
 
-#define USE_CYD_24      //for CYD 2.4"
-//#define USE_CYD_28_1      //for CYD 2.8" Variant 1
+//#define USE_CYD_24      //for CYD 2.4"
+#define USE_CYD_28_1      //for CYD 2.8" Variant 1
 //#define USE_CYD_28_2    //for CYD 2.8" Variant 2
 
 //-------------------------------------------------------
@@ -97,12 +97,21 @@ void setup() {
   #define SCL_PIN 22
   GAIN = 5.0;  //speaker volume
   setVersion(version, "printpoop24_manifest.json");
-#else  //all CYD 2.8" variants
+#endif
+//#else  //all CYD 2.8" variants
+#ifdef USE_CYD_28_1
   #define ROTATION 0
   #define SDA_PIN 27
   #define SCL_PIN 22
   GAIN = 2.0;  //speaker volume (recommend connect AMP IC pin 4 and 5 with R 1K ohm)
   setVersion(version, "printpoop28_1_manifest.json");
+#endif
+#ifdef USE_CYD_28_2
+  #define ROTATION 5 //rotate + flip
+  #define SDA_PIN 27
+  #define SCL_PIN 22
+  GAIN = 2.0;  //speaker volume
+  setVersion(version, "printpoop28_2_manifest.json");
 #endif
 
   //pin configuration
