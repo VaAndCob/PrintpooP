@@ -11,12 +11,11 @@
  # Partition scheme: Max App Only (3.9MB)
 **/
 
-// === Uncomment the CYD model you want to compile =====
-
 #define USE_CYD_24    0 //for CYD 2.4"
 #define USE_CYD_28_1  1 //for CYD 2.8" Variant 1
 #define USE_CYD_28_2  2 //for CYD 2.8" Variant 2
 
+// Enter the CYD model you want to compile
 #define BOARD USE_CYD_28_2  //<- Select board here
 
 //-------------------------------------------------------
@@ -106,7 +105,7 @@ void setup() {
   GAIN = 2.0;  //speaker volume (recommend connect AMP IC pin 4 and 5 with R 1K ohm)
   setVersion(version, "printpoop28_1_manifest.json");
 #elif BOARD == USE_CYD_28_2
-  #define ROTATION 4 //rotate + flip
+  #define ROTATION 4
   #define SDA_PIN 27
   #define SCL_PIN 22
   GAIN = 2.0;  //speaker volume
