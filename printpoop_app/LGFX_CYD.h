@@ -11,7 +11,8 @@
 
 class LGFX : public lgfx::LGFX_Device {
   // Provide panel parameters
-#ifdef USE_CYD_24  // cyd 2.4"
+//#if BOARD == USE_CYD_24 || BOARD == USE_CYD_28_C // cyd 2.4"
+#if BOARD == USE_CYD_24 // cyd 2.4"
   lgfx::Panel_ILI9341_2 _panel_instance;
 #else  // cyd 2.8"
   lgfx::Panel_ILI9341 _panel_instance;
@@ -60,7 +61,8 @@ public:
       cfg.dummy_read_bits = 1;
       cfg.readable = true;
 
-#ifdef USE_CYD_28_1  // CYD 2.8" variant1
+
+#if BOARD == USE_CYD_28_1  // CYD 2.8" variant1
       cfg.invert = false;
 #else  // CYD 2.4 and 2.8" variant2
       cfg.invert = true;
@@ -83,13 +85,13 @@ public:
       cfg.bus_shared = true;  // Touch uses different pins on the same SPI bus
       cfg.pin_int = 36;
 
-#ifdef USE_CYD_24  // CYD 2.4" touch
+#if BOARD == USE_CYD_24 // CYD 2.4" touch
       cfg.offset_rotation = 3;
       cfg.spi_host = HSPI_HOST;  // Touch controller is on the HSPI bus
       cfg.pin_sclk = -1;         //share with lcd
       cfg.pin_mosi = -1;         //share with lcd
       cfg.pin_miso = -1;         //share with lcd
-#else                            // CYD 2.8" touch
+#else
       cfg.offset_rotation = 0;
       cfg.spi_host = VSPI_HOST;  // Touch controller is on the HSPI bus
       cfg.pin_sclk = 25;
@@ -105,11 +107,13 @@ public:
 
     {  // ======== BACKLIGHT CONFIG ========
       auto cfg = _light_instance.config();
-#ifdef USE_CYD_24  //CYD 2.4"
+
+#if BOARD == USE_CYD_24 //CYD 2.4"
       cfg.pin_bl = 27;
-#else  //CYD 2.8"
+#else               //CYD 2.8" 1 - 2
       cfg.pin_bl = 21;
 #endif
+
       cfg.invert = false;
       cfg.freq = 12000;
       cfg.pwm_channel = 0;

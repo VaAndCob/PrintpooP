@@ -13,9 +13,11 @@
 
 // === Uncomment the CYD model you want to compile =====
 
-//#define USE_CYD_24      //for CYD 2.4"
-#define USE_CYD_28_1      //for CYD 2.8" Variant 1
-//#define USE_CYD_28_2    //for CYD 2.8" Variant 2
+#define USE_CYD_24    0 //for CYD 2.4"
+#define USE_CYD_28_1  1 //for CYD 2.8" Variant 1
+#define USE_CYD_28_2  2 //for CYD 2.8" Variant 2
+
+#define BOARD USE_CYD_28_2  //<- Select board here
 
 //-------------------------------------------------------
 #include <Arduino.h>
@@ -90,24 +92,21 @@ void setup() {
   Serial.print(F(" | "));
   Serial.println(compile_date);
 
-
-#ifdef USE_CYD_24  //CYD 2.4"
+// Pin configuration by board type
+#if BOARD == USE_CYD_24
   #define ROTATION 4 //rotate + flip
   #define SDA_PIN 21
   #define SCL_PIN 22
   GAIN = 5.0;  //speaker volume
   setVersion(version, "printpoop24_manifest.json");
-#endif
-//#else  //all CYD 2.8" variants
-#ifdef USE_CYD_28_1
+#elif BOARD == USE_CYD_28_1
   #define ROTATION 0
   #define SDA_PIN 27
   #define SCL_PIN 22
   GAIN = 2.0;  //speaker volume (recommend connect AMP IC pin 4 and 5 with R 1K ohm)
   setVersion(version, "printpoop28_1_manifest.json");
-#endif
-#ifdef USE_CYD_28_2
-  #define ROTATION 5 //rotate + flip
+#elif BOARD == USE_CYD_28_2
+  #define ROTATION 4 //rotate + flip
   #define SDA_PIN 27
   #define SCL_PIN 22
   GAIN = 2.0;  //speaker volume
