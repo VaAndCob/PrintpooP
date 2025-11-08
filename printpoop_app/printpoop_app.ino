@@ -25,10 +25,6 @@ const String compile_date = __DATE__ " - " __TIME__;
 //-------------------------------------------------------
 #include "soc/soc.h"          // Disable brownout problems
 #include "soc/rtc_cntl_reg.h" // Disable brownout problems
-#include "freertos/FreeRTOS.h"
-#include "freertos/timers.h"
-#include <freertos/task.h>
-#include <freertos/semphr.h>
 
 #include <ArduinoJson.h>
 #include <SPI.h>

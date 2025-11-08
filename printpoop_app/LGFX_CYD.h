@@ -11,7 +11,6 @@
 
 class LGFX : public lgfx::LGFX_Device {
   // Provide panel parameters
-//#if BOARD == USE_CYD_24 || BOARD == USE_CYD_28_C // cyd 2.4"
 #if BOARD == USE_CYD_24 || BOARD == USE_CYD_28_2 // cyd 2.4"
   lgfx::Panel_ILI9341_2 _panel_instance;
 #else  // cyd 2.8"
