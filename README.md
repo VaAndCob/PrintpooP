@@ -24,16 +24,16 @@ The enclosure is engineered to replace the Bambu Lab A1's default hotend facepla
 
 
 HOW TO USE: 
-1. Touch screen calibration will be shown at the first run, but can be manually entered by pressing the RESET button and then pressing BOOT (GPIO_0) button within a second and hold
-2. Follow the screen instructions. (Click the SETUP button on the screen to enter network configuration)
-3. Access the setup web portal by connecting to the SSID PirntpooP_Setup using a smartphone or laptop.
-4. Configure Wi-Fi credentials on the Configure Wi-Fi page.
-5. Enter the printer's IP address, access code, serial number, and time zone on the SETUP page.
+1. Touch screen calibration will be displayed during the first run, but can also be manually entered by pressing the RESET button and releasing, then pressing the BOOT (GPIO_0) button within one second and holding it for a second.
+Use a touch pen to touch all 4 corners of the screen.
+2. SETUP → Wi-Fi Tab to configure Wi-Fi credentials.
+3. SETUP → Printer Tab to configure the printer's IP address, access code, serial number, and time zone.
+4. Enter the printer's IP address, access code, serial number, and time zone on the SETUP → Printer Tab
    
     How to get printer serial number:  https://wiki.bambulab.com/en/general/find-sn
    
     How to get printer IP address & Access Code:  https://wiki.bambulab.com/en/software/bambu-studio/failed-to-send-print-files
-6. Currently, there are 4 status display pages
+5. Currently, there are 4 status display pages
    
    Page 1 - PrintpooP in action (displays a cute kitten or puppy for each print stage)
 
@@ -55,6 +55,11 @@ HOW TO USE: 
 
 
 ## [💾 Parts assembly & soldering](https://github.com/VaAndCob/PrintpooP/tree/main/hardware)
+
+FAQ: 
+- Why is support for custom images or user-defined graphics currently unavailable?
+- Why is Over-The-Air (OTA) firmware update functionality not included?
+Answer: It's the hardware limitation.
 
 ---------------------------------------------------------------------------------------------------
 
