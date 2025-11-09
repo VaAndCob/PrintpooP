@@ -1,6 +1,6 @@
 # PrintpooP – Retro Pixel Smart Display for Bambu Lab A1
 - WORK BOTH 2.4" and 2.8" Resistive Touch Screen
-- Firmware version: 1.5.0 (display on the top left-most on the welcome screen)
+- Firmware version: 1.6.0 (display on the top left-most on the welcome screen)
 - [Version history](https://github.com/VaAndCob/PrintpooP/blob/main/CHANGELOG.md)
 ## Quick start, flash and go, no code needed
 - [Flash Firmware Online for 2.4" and 2.8"](https://vaandcob.github.io/webpage/src/index.html)
@@ -18,7 +18,7 @@ PrintpooP connects to your A1 via Wi-Fi and presents real-time print data, such 
 
 🎮 8-Bit Aesthetic
 All visuals are styled in charming 8-bit pixel art, giving your printer a retro personality. Animations and icons are custom-designed to blend nostalgic design with functional UX and sound effects.
-
+Choose between two adorable themes: a playful **Kitten** or a loyal **Puppy** to accompany your printing journey!
 🛠️ Easy Mounting
 The enclosure is engineered to replace the Bambu Lab A1's default hotend faceplate, securing PrintpooP in a clean, integrated form factor.
 
@@ -35,7 +35,7 @@ HOW TO USE: 
     How to get printer IP address & Access Code:  https://wiki.bambulab.com/en/software/bambu-studio/failed-to-send-print-files
 6. Currently, there are 4 status display pages
    
-   Page 1 - PrintpooP in action  (display a cute cat on each print stage)
+   Page 1 - PrintpooP in action (displays a cute kitten or puppy for each print stage)
 
       - After one minute of inactivity, trigger a "PrintpooP" swinging animation for the idle state.
  
@@ -50,8 +50,8 @@ HOW TO USE: 
    Page 4 - AMS filament type and colour / current slot
 
 ![Swing](/picture/swing.gif)
-![Screen](/picture/screen1.jpg)
-![Network Setup](/picture/screen2.jpg)
+![Screen](/picture/ui.png)
+
 
 
 ## [💾 Parts assembly & soldering](https://github.com/VaAndCob/PrintpooP/tree/main/hardware)
@@ -75,10 +75,3 @@ Commercial use is strictly prohibited. For licensing inquiries, contact [Va&Cob]
 
 ---------------------------------------------------------------------------------------------------
 [![Buy Me a Coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=☕&slug=vaandcob&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff)](https://www.buymeacoffee.com/vaandcob)
-
-
-
-
-
-
-

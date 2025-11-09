@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "sketch"
+		}
+	],
+	"settings": {
+    "platformio-ide.workspaceDir": "sketch"
+  }
+}
