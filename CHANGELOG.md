@@ -1,5 +1,8 @@
 ## Version history
 
+### 1.6.0 (Nov 10th, 2025)
+- "Kitten" and "Puppy" theme added
+- Network configuration on screen
 ### 1.5.0 (Oct 10th, 2025)
 - Replace the TFT_eSPI library to LovyanGFX library for easy configuration
 - Disable brownout detection to prevent randomly reset when the ESP32 attemp to connect to WiFi implemented
