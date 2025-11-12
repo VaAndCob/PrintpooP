@@ -1,3 +1,4 @@
 .DS_Store
-.pio
-.vscode
+.pio/
+.vscode/
+.desktop.ini
