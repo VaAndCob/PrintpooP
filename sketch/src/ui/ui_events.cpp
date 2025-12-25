@@ -36,21 +36,19 @@ void wait5second(lv_event_t* e) {
   lv_img_set_pivot(ui_status_image_swing,64,0);
   lv_label_set_text(ui_status_label_ppmessage, "Woof! I am PrintpooP (Swipe left/right for pages)");
 #endif
-
-  wifimanager_init();
+  wifi_init();
   mqtt_init();
   initRTC();
 }
 
 
-// wifimanager web portal
+// wifi setup tab
 void openSetupScreen(lv_event_t* e) {
   clickSound();
   wm_configmode = true; // stop mqtt attemp to connect
   lv_label_set_text(ui_setup_label_wifissid, WIFI_SSID.c_str());
   lv_textarea_set_text(ui_setup_textarea_password, WIFI_PASS.c_str());
 }
-
 
 void closeSetupScreen(lv_event_t* e) {
   clickSound();

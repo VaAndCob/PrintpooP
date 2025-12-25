@@ -1,56 +1,66 @@
 # Compiling the Source Code for PrintPooP Project
 
-This guide provides instructions on how to set up your environment and compile the source code for the PrintPooP project.
+This guide provides instructions on how to set up your environment and compile the source code for the PrintPooP project using PlatformIO.
 
-## 1. Add an additional Partition Scheme
+## 1. Prerequisites
 
-https://github.com/VaAndCob/PrintpooP/blob/main/printpoop_app/addon/partitions/readme.md
+* **IDE:** Visual Studio Code with the PlatformIO IDE extension.
+* **Hardware:** CYD 2.4" ESP32 Dev Board (or compatible 2.8" version).
 
-## 2. Prerequisites & Setup
+## 2. Project Setup
 
-Ensure your environment matches the following requirements:
+1.  Clone this repository to your local machine.
+2.  Open the `sketch` folder in Visual Studio Code.
+3.  PlatformIO should automatically detect the project and ask to install the dependencies. If not, you can install them manually using the PlatformIO sidebar.
 
-* **Hardware:** CYD 2.4" ESP32 Dev Board (or compatible 2.8" version, see specific setup below)
-* **IDE:** Arduino IDE 2.3.6 (or compatible)
-* **ESP32 Core:** Version 2.0.17 (or compatible)
-* **Board Selection in IDE:** "ESP32 Dev Module"
-* **Partition Scheme:** "Max App Only (3.9MB App)"
-    * **Action:** You must add this custom partition scheme to your Arduino IDE *before* compiling. Instructions for this are located in the `/addon/partitions` folder of this project.
-    https://github.com/VaAndCob/PrintpooP/tree/main/printpoop_app/addon/partitions
+The required libraries are listed in `platformio.ini` and will be installed automatically:
+* `lovyan03/LovyanGFX`
+* `lvgl/lvgl`
+* `electroniccats/MPU6050`
+* `knolleary/PubSubClient`
+* `bblanchon/ArduinoJson`
+* `fbiego/ESP32Time`
 
-* **Required Libraries:**
-    * `lovyanGFX 1.2.7`
-    * `lvgl 8.3.11`
-    * *(And any other libraries specified as needed by the sketch)*
-    * **Action:** Ensure all necessary libraries are installed in your Arduino IDE.
+## 3. Partition Scheme
 
----
+The project is configured to use a custom partition scheme `partitions/max_app_only.csv`. This is set in `platformio.ini` and no manual action is required.
 
-## 3. Configure the `lvgl` Library
+## 4. Application Configuration
 
-**Copy `lv_config.h`** from addon folder into arduino library folder **`<username>\Arduino\Sketch\libraries`**
+Before compiling, you can configure the application by editing `include/app_config.h`:
 
----
+*   **Theme:** Choose between `KITTEN` and `PUPPY`.
+*   **Board:** Select your CYD board model (`USE_CYD_24`, `USE_CYD_28_1`, `USE_CYD_28_2`).
 
-## 4. Select Target Screen Size for Compilation
+```c++
+//1. Select theme options
+#define KITTEN 0
+#define PUPPY 1
 
-**Edit `printpoop_app.ino`** (your main sketch file):
-    * Go to approximately line 29 in `printpoop_app.ino`and set macro is defined (uncommented):
- 
-        ```cpp
-        #define USE_CYD_24      //for CYD 2.4"
-        #define USE_CYD_28_1     //for CYD 2.8" Variant 1
-        #define USE_CYD_28_2    //for CYD 2.8" Variant 2
-        ```        
+//Enter display theme you want to compile
+#define THEME KITTEN //<- KITTEN or PUPPY
+//-------------------------------------------
 
----
+//2. Select board model options
+#define USE_CYD_24 0   // for CYD 2.4"
+#define USE_CYD_28_1 1 // for CYD 2.8" Variant 1
+#define USE_CYD_28_2 2 // for CYD 2.8" Variant 2
 
-## 5. Compile and Upload
+// Enter the CYD model you want to compile
+#define BOARD USE_CYD_28_1 //<- Set board here
+//-------------------------------------------
+```
 
-After completing the above steps:
+## 5. LVGL Configuration
 
-1.  Open the `printpoop_app.ino` sketch in your Arduino IDE.
-2.  Ensure the correct Board ("ESP32 Dev Module") and Partition Scheme ("Max App Only (3.9MB App)") are selected under the `Tools` menu.
-3.  Compile and upload the sketch to your ESP32 CYD board.
+The `lv_conf.h` file is included in the `include` directory. The project is configured to use it automatically. No manual steps are required.
+
+## 6. Compile and Upload
+
+1.  Click on the PlatformIO icon in the VSCode activity bar.
+2.  Under "Project Tasks", you can:
+    *   **Build:** Compile the code.
+    *   **Upload:** Compile and upload to your connected device.
+    *   **Monitor:** Open the serial monitor.
 
 ---

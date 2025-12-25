@@ -138,10 +138,7 @@ void mqtt_init();
 void wifi_status();
 void mqtt_handler();
 void mqttCallback(char* topic, byte* payload, unsigned int length);
-void wifimanager_init();
-void saveParamsCallback();
-
-void wifimanager_init_reset(bool test);
+void wifi_init();
 
 
 

@@ -283,7 +283,7 @@ lv_obj_set_height( ui_setup_textarea_accesscode, LV_SIZE_CONTENT);   /// 20
 lv_obj_set_x( ui_setup_textarea_accesscode, 10 );
 lv_obj_set_y( ui_setup_textarea_accesscode, 14 );
 lv_obj_set_align( ui_setup_textarea_accesscode, LV_ALIGN_TOP_RIGHT );
-lv_textarea_set_accepted_chars(ui_setup_textarea_accesscode, "0123456789");
+lv_textarea_set_accepted_chars(ui_setup_textarea_accesscode, "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
 lv_textarea_set_max_length(ui_setup_textarea_accesscode,8);
 lv_textarea_set_placeholder_text(ui_setup_textarea_accesscode,"00000000");
 lv_textarea_set_one_line(ui_setup_textarea_accesscode,true);
@@ -389,6 +389,8 @@ ui_setup_textarea_filelist = lv_textarea_create(ui_setup_tabpage_abouttab);
 lv_obj_set_height( ui_setup_textarea_filelist, 150);
 lv_obj_set_width( ui_setup_textarea_filelist, lv_pct(100));
 lv_obj_set_align( ui_setup_textarea_filelist, LV_ALIGN_TOP_MID );
+lv_textarea_set_max_length(ui_setup_textarea_filelist,500);
+lv_textarea_set_text(ui_setup_textarea_filelist,"Thank for boosting me.\nhttps://www.youtube.com/@vacob6494\n");
 lv_obj_set_style_border_color(ui_setup_textarea_filelist, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_border_opa(ui_setup_textarea_filelist, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_border_width(ui_setup_textarea_filelist, 2, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -467,6 +469,7 @@ lv_obj_add_event_cb(ui_setup_button_saveprinter, ui_event_setup_button_saveprint
 lv_obj_add_event_cb(ui_setup_button_loadimage, ui_event_setup_button_loadimage, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_setup_tabview_tabview1, ui_event_setup_tabview_tabview1, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_setup_button_close, ui_event_setup_button_close, LV_EVENT_ALL, NULL);
+lv_keyboard_set_textarea(ui_setup_keyboard_keyboard1,ui_setup_textarea_password);
 lv_obj_add_event_cb(ui_setup_keyboard_keyboard1, ui_event_setup_keyboard_keyboard1, LV_EVENT_ALL, NULL);
 
 }

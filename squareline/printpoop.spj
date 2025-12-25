@@ -11915,7 +11915,7 @@
                       {
                         "nid": 1060,
                         "strtype": "TEXTAREA/Accepted_characters",
-                        "strval": "0123456789",
+                        "strval": "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
                         "InheritedType": 10
                       },
                       {
@@ -14028,7 +14028,7 @@
                       {
                         "nid": 1020,
                         "strtype": "TEXTAREA/Text",
-                        "strval": "",
+                        "strval": "Thank for boosting me.\\nhttps://www.youtube.com/@vacob6494\\n",
                         "InheritedType": 10
                       },
                       {
@@ -14058,7 +14058,7 @@
                       {
                         "nid": 1070,
                         "strtype": "TEXTAREA/Max_text_length",
-                        "integer": 98989898,
+                        "integer": 500,
                         "InheritedType": 6
                       },
                       {
@@ -14810,7 +14810,8 @@
                     "InheritedType": 11
                   }
                 ],
-                "saved_objtypeKey": "TABPAGE"
+                "saved_objtypeKey": "TABPAGE",
+                "tree_closed": true
               }
             ],
             "dont_export": false,
@@ -15847,7 +15848,7 @@
               {
                 "nid": 1020,
                 "strtype": "KEYBOARD/Target_textarea",
-                "strval": "-",
+                "strval": "GUID3695508-56786S360834308",
                 "InheritedType": 9
               },
               {
@@ -17434,7 +17435,7 @@
     "theme_color1": 5,
     "theme_color2": 0,
     "custom_variable_prefix": "uic",
-    "backup_cnt": 350,
+    "backup_cnt": 352,
     "autosave_cnt": 0,
     "group_color_cnt": 2,
     "lvgl_version": "8.3.11",

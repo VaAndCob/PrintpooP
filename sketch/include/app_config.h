@@ -1,3 +1,5 @@
+//This is the main configuration options before compile.
+
 //1. Select theme options
 #define KITTEN 0
 #define PUPPY 1
@@ -12,5 +14,5 @@
 #define USE_CYD_28_2 2 // for CYD 2.8" Variant 2
 
 // Enter the CYD model you want to compile
-#define BOARD USE_CYD_28_1 //<- Set board here
+#define BOARD USE_CYD_28_2 //<- Set board here
 //-------------------------------------------

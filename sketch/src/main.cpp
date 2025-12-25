@@ -14,7 +14,7 @@
 
 //-------------------------------------------------------
 #include <Arduino.h>
-const String version = "1.6.0";
+const String version = "1.6.1";
 const String compile_date = __DATE__ " - " __TIME__;
 //-------------------------------------------------------
 #include "soc/rtc_cntl_reg.h" // Disable brownout problems

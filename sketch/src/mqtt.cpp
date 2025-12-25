@@ -307,7 +307,7 @@ static void update_print_status(JsonDocument& incomingJson, uint8_t page) {
                                                                          // Show full print object
 #ifdef SHOW_MQTT_MSG
     String printString;
-    serializeJson(incomingJson["print"], printString);
+    serializeJsonPretty(incomingJson["print"], printString);
     Serial.println(printString);
 #endif
 
@@ -759,7 +759,7 @@ void mqttCallback(char* topic, byte* payload, unsigned int length) {
 
 //========================= WIFI =========================
 // init wifi manager
-void wifimanager_init() {
+void wifi_init() {
 
   slowblink_Animation(ui_status_label_wifisymbol, 0);
   lv_label_set_text(ui_status_label_printstage, "Connecting to WiFi...");
