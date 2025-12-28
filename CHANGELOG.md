@@ -1,6 +1,6 @@
 ## Version history
 
-### 1.6.1 (Dec 18th, 2025)
+### 1.6.1 (Dec 28th, 2025)
 - Access Code can enter upper/lower case for other printer models.
 ### 1.6.0 (Nov 10th, 2025)
 - "Kitten" and "Puppy" theme added

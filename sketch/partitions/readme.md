@@ -1,6 +1,7 @@
 # Adding "Max App Only (3.9MB)" Partition Scheme to Arduino IDE for ESP32
 
 # NO NEED TO ADD A NEW PARITION ON PLATFORMIO
+# This is for Arduino IDE only
 
 This guide explains how to add a custom partition scheme to your Arduino IDE for ESP32 development, specifically one that maximizes application space to approximately 3.9MB.
 
