@@ -1,5 +1,7 @@
 ## Version history
 
+### 1.6.2 (Jan 9th, 2026)
+- Set screen rotation 180 degree flip button added in screen setting tab
 ### 1.6.1 (Dec 28th, 2025)
 - Access Code can enter upper/lower case for other printer models.
 ### 1.6.0 (Nov 10th, 2025)

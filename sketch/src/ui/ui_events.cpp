@@ -17,7 +17,8 @@ void wait5second(lv_event_t* e) {
   lv_label_set_text(ui_setup_label_setup_label1, LV_SYMBOL_CLOSE " CLOSE");
   lv_label_set_text(ui_setup_label_setup_label2, LV_SYMBOL_SAVE " SAVE");
   lv_label_set_text(ui_setup_label_setup_label3, LV_SYMBOL_SAVE " SAVE");
-  lv_label_set_text(ui_setup_label_setup_label4, LV_SYMBOL_UPLOAD " LOAD");
+  lv_label_set_text(ui_setup_label_setup_label4, LV_SYMBOL_REFRESH " Rotate 180°");
+  
 
   lv_label_set_text(ui_intro_label_version, current_version.c_str());
   startMusicPlayback(start, 7);
@@ -190,6 +191,14 @@ void savePrinterSetup(lv_event_t* e) {
   pref.end();
 }
 // Photo tab Load button
-void funfunfun(lv_event_t* e) {
+void rotateScreen(lv_event_t* e) {
   clickSound();
+  flip = !flip;//toggle flip 
+  if (flip) rotation = rotation + 2;
+  else rotation = rotation - 2;
+  tft.setRotation(rotation); // Portrait
+  lv_obj_invalidate(lv_scr_act());
+  pref.begin("config", false);  //load configuration first
+  pref.putBool("flip", flip);
+  pref.end();
 }

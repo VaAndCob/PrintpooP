@@ -12,6 +12,9 @@
 ESP32Time rtc;          //offset GMT+7
 //mytime currentTime;
 
+bool flip = false;
+uint8_t rotation = 0;
+
 String TZoffset = "0";
 #define UTC_OFFSET_DST 0
 #define NTP_SERVER "pool.ntp.org"

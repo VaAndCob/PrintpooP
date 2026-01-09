@@ -14,7 +14,7 @@
 
 //-------------------------------------------------------
 #include <Arduino.h>
-const String version = "1.6.1";
+const String version = "1.6.2";
 const String compile_date = __DATE__ " - " __TIME__;
 //-------------------------------------------------------
 #include "soc/rtc_cntl_reg.h" // Disable brownout problems
@@ -82,22 +82,26 @@ void setup() {
   Serial.print(version);
   Serial.print(F(" | "));
   Serial.println(compile_date);
+  //load screen flip setting
+  pref.begin("config", true);
+  flip = pref.getBool("flip", false);
+  pref.end();
 
 // Pin configuration by board type
 #if BOARD == USE_CYD_24
-#define ROTATION 4 // rotate + flip
+if (flip) rotation = 6; else rotation = 4;//rotation = 4; // 6 rotate 180
 #define SDA_PIN 21
 #define SCL_PIN 22
   GAIN = 5.0; // speaker volume
   setVersion(version, "printpoop24_kitten_manifest.json");
 #elif BOARD == USE_CYD_28_1
-#define ROTATION 0
+if (flip) rotation = 2; else rotation = 0;//rotation = 0; //or 2 rotate 180
 #define SDA_PIN 27
 #define SCL_PIN 22
   GAIN = 2.0; // speaker volume (recommend connect AMP IC pin 4 and 5 with R 1K ohm)
   setVersion(version, "printpoop28_1_kitten_manifest.json");
 #elif BOARD == USE_CYD_28_2
-#define ROTATION 4
+if (flip) rotation = 6; else rotation = 4;//rotation = 4;// or 6 rotate 180
 #define SDA_PIN 27
 #define SCL_PIN 22
   GAIN = 2.0; // speaker volume
@@ -119,7 +123,7 @@ void setup() {
 
   // init TFT
   tft.begin();
-  tft.setRotation(ROTATION); // Portrait
+  tft.setRotation(rotation); // Portrait
   tft.setBrightness(200);
 
   // screen calibration

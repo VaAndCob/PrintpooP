@@ -21,6 +21,10 @@ extern String current_version;
 extern bool firmware_checked;
 extern String firmware_manifest;
 extern bool mpu_install;
+extern bool flip;
+extern uint8_t rotation;
+
+
 
 void initRTC();
 String get_current_time();
