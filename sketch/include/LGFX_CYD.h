@@ -62,7 +62,8 @@ public:
 
 
 #if BOARD == USE_CYD_28_1  // CYD 2.8" variant1
-      cfg.invert = false;
+     // cfg.invert = false;
+      cfg.invert = true;
 #else  // CYD 2.4 and 2.8" variant2
       cfg.invert = true;
 #endif
@@ -112,7 +113,7 @@ public:
 #else               //CYD 2.8" 1 - 2
       cfg.pin_bl = 21;
 #endif
-
+     //  cfg.invert = true;
       cfg.invert = false;
       cfg.freq = 12000;
       cfg.pwm_channel = 0;
