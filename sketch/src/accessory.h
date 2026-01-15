@@ -23,6 +23,8 @@ extern String firmware_manifest;
 extern bool mpu_install;
 extern bool flip;
 extern uint8_t rotation;
+extern bool auto_dim;
+extern uint8_t brightness;
 
 
 

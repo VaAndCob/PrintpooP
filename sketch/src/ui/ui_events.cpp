@@ -198,7 +198,40 @@ void rotateScreen(lv_event_t* e) {
   else rotation = rotation - 2;
   tft.setRotation(rotation); // Portrait
   lv_obj_invalidate(lv_scr_act());
-  pref.begin("config", false);  //load configuration first
+  pref.begin("config", false);
   pref.putBool("flip", flip);
   pref.end();
+}
+
+void enable_autodim(lv_event_t * e) {
+  lv_obj_add_flag(ui_setup_slider_brightness, LV_OBJ_FLAG_HIDDEN);
+  auto_dim = true;
+  clickSound();
+  pref.begin("config", false);
+  pref.putBool("autodim", auto_dim);
+  pref.end();
+
+}
+void disable_autodim(lv_event_t * e) {
+  lv_obj_clear_flag(ui_setup_slider_brightness, LV_OBJ_FLAG_HIDDEN);
+  auto_dim = false;
+  clickSound();
+  pref.begin("config", false);
+  pref.putBool("autodim", auto_dim);
+  pref.end();
+
+}
+void setBrightness(lv_event_t * e) {
+  lv_obj_t * slider = lv_event_get_target(e);
+  int32_t value = lv_slider_get_value(slider);
+  tft.setBrightness(value);
+}
+
+void saveBrightness(lv_event_t * e) {
+  lv_obj_t * slider = lv_event_get_target(e);
+  int32_t value = lv_slider_get_value(slider);
+  pref.begin("config", false);
+  pref.putChar("brightness", value);
+  pref.end();
+  clickSound();
 }

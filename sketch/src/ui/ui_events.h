@@ -21,6 +21,10 @@ void togglekeyboard(lv_event_t * e);
 void saveWiFiSetup(lv_event_t * e);
 void savePrinterSetup(lv_event_t * e);
 void rotateScreen(lv_event_t * e);
+void enable_autodim(lv_event_t * e);
+void disable_autodim(lv_event_t * e);
+void setBrightness(lv_event_t * e);
+void saveBrightness(lv_event_t * e);
 void closeSetupScreen(lv_event_t * e);
 void readKeyboard(lv_event_t * e);
 

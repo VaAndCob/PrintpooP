@@ -93,6 +93,8 @@ void clickSound() {
 }
 
 //-----------  auto dim backlight function ------------
+bool auto_dim = true;
+uint8_t brightness = 128;
 #define LDR_PIN 34  //LDR sensor
 #define backlightChannel 0
 static uint8_t low_count = 0;
@@ -101,6 +103,7 @@ static bool dim = false;                   //back light dim flag
 static const uint16_t LIGHT_LEVEL = 1500;  //backlight control by light level Higher = darker light
 
 void autoDim() {
+  if (!auto_dim) return;
   int light = analogRead(LDR_PIN);  //read light
   // Serial.printf("LDR: %d\n",light);
   if (light > LIGHT_LEVEL) {  //low light

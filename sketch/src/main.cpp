@@ -14,7 +14,7 @@
 
 //-------------------------------------------------------
 #include <Arduino.h>
-const String version = "1.6.2";
+const String version = "1.7.0";
 const String compile_date = __DATE__ " - " __TIME__;
 //-------------------------------------------------------
 #include "soc/rtc_cntl_reg.h" // Disable brownout problems
@@ -85,10 +85,12 @@ void setup() {
   //load screen flip setting
   pref.begin("config", true);
   flip = pref.getBool("flip", false);
+  brightness = pref.getChar("brightness", 128);
+  auto_dim = pref.getBool("autodim", true);
   pref.end();
 
 // Pin configuration by board type
-#if BOARD == USE_CYD_24
+#if (BOARD == USE_CYD_24_1 || BOARD == USE_CYD_24_2)
 if (flip) rotation = 6; else rotation = 4;//rotation = 4; // 6 rotate 180
 #define SDA_PIN 21
 #define SCL_PIN 22
@@ -124,7 +126,7 @@ if (flip) rotation = 6; else rotation = 4;//rotation = 4;// or 6 rotate 180
   // init TFT
   tft.begin();
   tft.setRotation(rotation); // Portrait
-  tft.setBrightness(200);
+  tft.setBrightness(128);
 
   // screen calibration
   if (digitalRead(SELECTOR_PIN) == LOW) {
@@ -158,8 +160,24 @@ if (flip) rotation = 6; else rotation = 4;//rotation = 4;// or 6 rotate 180
   lv_indev_drv_register(&indev_drv);
 
   ui_init();
+  
+  //brightness
+  if (auto_dim) {
+    lv_obj_add_state(ui_setup_checkbox_autodim, LV_STATE_CHECKED);
+    lv_obj_add_flag(ui_setup_slider_brightness, LV_OBJ_FLAG_HIDDEN);
+  } else {
+    lv_obj_clear_state(ui_setup_checkbox_autodim, LV_STATE_CHECKED);
+    lv_slider_set_value(ui_setup_slider_brightness, brightness, LV_ANIM_ON);
+    lv_obj_clear_flag(ui_setup_slider_brightness, LV_OBJ_FLAG_HIDDEN);
+    tft.setBrightness(brightness);
+  }
 
   // lv_label_set_text(ui_status_label_printstage,"Idle"); //test swing
+    Serial.printf(
+        "Heap free: %u | Largest block: %u\n",
+        heap_caps_get_free_size(MALLOC_CAP_8BIT),
+        heap_caps_get_largest_free_block(MALLOC_CAP_8BIT)
+    );
 }
 
 //------------------------------------------------------

@@ -1,5 +1,7 @@
 ## Version history
 
+### 1.7.0 (Jan 15th, 2026)
+- Auto screen dim Enable/Disable checkbox & Manual screen brightness setting added
 ### 1.6.2 (Jan 9th, 2026)
 - Set screen rotation 180 degree flip button added in screen setting tab
 ### 1.6.1 (Dec 28th, 2025)

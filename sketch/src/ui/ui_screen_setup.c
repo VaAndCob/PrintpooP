@@ -5,7 +5,7 @@
 
 #include "ui.h"
 
-lv_obj_t *ui_screen_setup = NULL;lv_obj_t *ui_setup_tabview_tabview1 = NULL;lv_obj_t *ui_setup_tabpage_wifitab = NULL;lv_obj_t *ui_setup_button_wifiscan = NULL;lv_obj_t *ui_setup_label_label2 = NULL;lv_obj_t *ui_setup_label_networkcount = NULL;lv_obj_t *ui_setup_roller_ssid = NULL;lv_obj_t *ui_setup_label_wifissid = NULL;lv_obj_t *ui_setup_textarea_password = NULL;lv_obj_t *ui_setup_button_savewifi = NULL;lv_obj_t *ui_setup_label_setup_label3 = NULL;lv_obj_t *ui_setup_tabpage_printertab = NULL;lv_obj_t *ui_setup_textarea_printerip = NULL;lv_obj_t *ui_setup_textarea_accesscode = NULL;lv_obj_t *ui_setup_textarea_printerserial = NULL;lv_obj_t *ui_setup_textarea_timezone = NULL;lv_obj_t *ui_setup_button_saveprinter = NULL;lv_obj_t *ui_setup_label_setup_label2 = NULL;lv_obj_t *ui_setup_label_label3 = NULL;lv_obj_t *ui_setup_label_label4 = NULL;lv_obj_t *ui_setup_label_label5 = NULL;lv_obj_t *ui_setup_tabpage_screentab = NULL;lv_obj_t *ui_setup_button_loadimage = NULL;lv_obj_t *ui_setup_label_setup_label4 = NULL;lv_obj_t *ui_setup_image_qrcode = NULL;lv_obj_t *ui_setup_button_close = NULL;lv_obj_t *ui_setup_label_setup_label1 = NULL;lv_obj_t *ui_setup_keyboard_keyboard1 = NULL;
+lv_obj_t *ui_screen_setup = NULL;lv_obj_t *ui_setup_tabview_tabview1 = NULL;lv_obj_t *ui_setup_tabpage_wifitab = NULL;lv_obj_t *ui_setup_button_wifiscan = NULL;lv_obj_t *ui_setup_label_label2 = NULL;lv_obj_t *ui_setup_label_networkcount = NULL;lv_obj_t *ui_setup_roller_ssid = NULL;lv_obj_t *ui_setup_label_wifissid = NULL;lv_obj_t *ui_setup_textarea_password = NULL;lv_obj_t *ui_setup_button_savewifi = NULL;lv_obj_t *ui_setup_label_setup_label3 = NULL;lv_obj_t *ui_setup_tabpage_printertab = NULL;lv_obj_t *ui_setup_textarea_printerip = NULL;lv_obj_t *ui_setup_textarea_accesscode = NULL;lv_obj_t *ui_setup_textarea_printerserial = NULL;lv_obj_t *ui_setup_textarea_timezone = NULL;lv_obj_t *ui_setup_button_saveprinter = NULL;lv_obj_t *ui_setup_label_setup_label2 = NULL;lv_obj_t *ui_setup_label_label3 = NULL;lv_obj_t *ui_setup_label_label4 = NULL;lv_obj_t *ui_setup_label_label5 = NULL;lv_obj_t *ui_setup_tabpage_screentab = NULL;lv_obj_t *ui_setup_button_loadimage = NULL;lv_obj_t *ui_setup_label_setup_label4 = NULL;lv_obj_t *ui_setup_image_qrcode = NULL;lv_obj_t *ui_setup_checkbox_autodim = NULL;lv_obj_t *ui_setup_slider_brightness = NULL;lv_obj_t *ui_setup_button_close = NULL;lv_obj_t *ui_setup_label_setup_label1 = NULL;lv_obj_t *ui_setup_keyboard_keyboard1 = NULL;
 // event funtions
 void ui_event_setup_tabview_tabview1( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
@@ -89,6 +89,30 @@ void ui_event_setup_button_loadimage( lv_event_t * e) {
 
 if ( event_code == LV_EVENT_PRESSED) {
       rotateScreen( e );
+}
+}
+
+void ui_event_setup_checkbox_autodim( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+
+if ( event_code == LV_EVENT_VALUE_CHANGED &&  lv_obj_has_state(target,LV_STATE_CHECKED)  ) {
+      enable_autodim( e );
+      _ui_flag_modify( ui_setup_slider_brightness, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+}
+if ( event_code == LV_EVENT_VALUE_CHANGED &&  !lv_obj_has_state(target,LV_STATE_CHECKED)  ) {
+      disable_autodim( e );
+      _ui_flag_modify( ui_setup_slider_brightness, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
+}
+}
+
+void ui_event_setup_slider_brightness( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+if ( event_code == LV_EVENT_VALUE_CHANGED) {
+      setBrightness( e );
+}
+if ( event_code == LV_EVENT_RELEASED) {
+      saveBrightness( e );
 }
 }
 
@@ -183,7 +207,7 @@ ui_setup_label_networkcount = lv_label_create(ui_setup_tabpage_wifitab);
 lv_obj_set_width( ui_setup_label_networkcount, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_setup_label_networkcount, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_setup_label_networkcount, 10 );
-lv_obj_set_y( ui_setup_label_networkcount, -7 );
+lv_obj_set_y( ui_setup_label_networkcount, -6 );
 lv_obj_set_align( ui_setup_label_networkcount, LV_ALIGN_TOP_RIGHT );
 lv_label_set_text(ui_setup_label_networkcount,"Click & wait Wi-Fi scan");
 
@@ -386,10 +410,10 @@ lv_obj_clear_flag( ui_setup_tabpage_screentab, LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_F
 lv_obj_set_scroll_dir(ui_setup_tabpage_screentab, LV_DIR_VER);
 
 ui_setup_button_loadimage = lv_btn_create(ui_setup_tabpage_screentab);
-lv_obj_set_width( ui_setup_button_loadimage, 190);
+lv_obj_set_width( ui_setup_button_loadimage, 150);
 lv_obj_set_height( ui_setup_button_loadimage, 40);
 lv_obj_set_x( ui_setup_button_loadimage, 0 );
-lv_obj_set_y( ui_setup_button_loadimage, 10 );
+lv_obj_set_y( ui_setup_button_loadimage, 83 );
 lv_obj_set_align( ui_setup_button_loadimage, LV_ALIGN_TOP_MID );
 lv_obj_add_flag( ui_setup_button_loadimage, LV_OBJ_FLAG_SCROLL_ON_FOCUS );   /// Flags
 lv_obj_clear_flag( ui_setup_button_loadimage, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
@@ -417,9 +441,43 @@ ui_setup_image_qrcode = lv_img_create(ui_setup_tabpage_screentab);
 lv_img_set_src(ui_setup_image_qrcode, &ui_img_qr_png);
 lv_obj_set_width( ui_setup_image_qrcode, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_setup_image_qrcode, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_setup_image_qrcode, -2 );
+lv_obj_set_y( ui_setup_image_qrcode, 49 );
 lv_obj_set_align( ui_setup_image_qrcode, LV_ALIGN_CENTER );
 lv_obj_add_flag( ui_setup_image_qrcode, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
 lv_obj_clear_flag( ui_setup_image_qrcode, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_img_set_zoom(ui_setup_image_qrcode,200);
+
+ui_setup_checkbox_autodim = lv_checkbox_create(ui_setup_tabpage_screentab);
+lv_checkbox_set_text(ui_setup_checkbox_autodim,"Auto Dim / Brightness");
+lv_obj_set_width( ui_setup_checkbox_autodim, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_setup_checkbox_autodim, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_setup_checkbox_autodim, LV_ALIGN_TOP_MID );
+lv_obj_add_flag( ui_setup_checkbox_autodim, LV_OBJ_FLAG_SCROLL_ON_FOCUS );   /// Flags
+lv_obj_set_style_text_font(ui_setup_checkbox_autodim, &lv_font_montserrat_18, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_setup_slider_brightness = lv_slider_create(ui_setup_tabpage_screentab);
+lv_slider_set_range(ui_setup_slider_brightness, 0,255);
+lv_slider_set_value( ui_setup_slider_brightness, 200, LV_ANIM_OFF);
+if (lv_slider_get_mode(ui_setup_slider_brightness)==LV_SLIDER_MODE_RANGE ) lv_slider_set_left_value( ui_setup_slider_brightness, 0, LV_ANIM_OFF);
+lv_obj_set_width( ui_setup_slider_brightness, 205);
+lv_obj_set_height( ui_setup_slider_brightness, 10);
+lv_obj_set_x( ui_setup_slider_brightness, 0 );
+lv_obj_set_y( ui_setup_slider_brightness, 47 );
+lv_obj_set_align( ui_setup_slider_brightness, LV_ALIGN_TOP_MID );
+lv_obj_set_style_bg_color(ui_setup_slider_brightness, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_setup_slider_brightness, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+lv_obj_set_style_bg_color(ui_setup_slider_brightness, lv_color_hex(0xD000FF), LV_PART_INDICATOR | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_setup_slider_brightness, 255, LV_PART_INDICATOR| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_grad_color(ui_setup_slider_brightness, lv_color_hex(0xDC76F9), LV_PART_INDICATOR | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_grad_dir(ui_setup_slider_brightness, LV_GRAD_DIR_HOR, LV_PART_INDICATOR| LV_STATE_DEFAULT);
+
+lv_obj_set_style_bg_color(ui_setup_slider_brightness, lv_color_hex(0xFFDB00), LV_PART_KNOB | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_setup_slider_brightness, 255, LV_PART_KNOB| LV_STATE_DEFAULT);
+lv_obj_set_style_border_color(ui_setup_slider_brightness, lv_color_hex(0x000000), LV_PART_KNOB | LV_STATE_DEFAULT );
+lv_obj_set_style_border_opa(ui_setup_slider_brightness, 255, LV_PART_KNOB| LV_STATE_DEFAULT);
+lv_obj_set_style_border_width(ui_setup_slider_brightness, 1, LV_PART_KNOB| LV_STATE_DEFAULT);
 
 ui_setup_button_close = lv_btn_create(ui_screen_setup);
 lv_obj_set_width( ui_setup_button_close, 120);
@@ -462,6 +520,8 @@ lv_obj_add_event_cb(ui_setup_textarea_printerserial, ui_event_setup_textarea_pri
 lv_obj_add_event_cb(ui_setup_textarea_timezone, ui_event_setup_textarea_timezone, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_setup_button_saveprinter, ui_event_setup_button_saveprinter, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_setup_button_loadimage, ui_event_setup_button_loadimage, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_setup_checkbox_autodim, ui_event_setup_checkbox_autodim, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_setup_slider_brightness, ui_event_setup_slider_brightness, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_setup_tabview_tabview1, ui_event_setup_tabview_tabview1, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_setup_button_close, ui_event_setup_button_close, LV_EVENT_ALL, NULL);
 lv_keyboard_set_textarea(ui_setup_keyboard_keyboard1,ui_setup_textarea_password);
@@ -499,6 +559,8 @@ ui_setup_tabpage_screentab= NULL;
 ui_setup_button_loadimage= NULL;
 ui_setup_label_setup_label4= NULL;
 ui_setup_image_qrcode= NULL;
+ui_setup_checkbox_autodim= NULL;
+ui_setup_slider_brightness= NULL;
 ui_setup_button_close= NULL;
 ui_setup_label_setup_label1= NULL;
 ui_setup_keyboard_keyboard1= NULL;
