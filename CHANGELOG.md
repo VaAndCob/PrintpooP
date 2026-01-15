@@ -1,6 +1,7 @@
 ## Version history
 
 ### 1.7.0 (Jan 15th, 2026)
+- Add CYD 2.4" variant 2
 - Auto screen dim Enable/Disable checkbox & Manual screen brightness setting added
 ### 1.6.2 (Jan 9th, 2026)
 - Set screen rotation 180 degree flip button added in screen setting tab
