@@ -1,5 +1,7 @@
 ## Version history
 
+### 1.7.1 (Jan 24th, 2026)
+- Touch calibration not saved fixed
 ### 1.7.0 (Jan 15th, 2026)
 - Add CYD 2.4" variant 2
 - Auto screen dim Enable/Disable checkbox & Manual screen brightness setting added

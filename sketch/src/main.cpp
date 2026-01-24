@@ -14,7 +14,7 @@
 
 //-------------------------------------------------------
 #include <Arduino.h>
-const String version = "1.7.0";
+const String version = "1.7.1";
 const String compile_date = __DATE__ " - " __TIME__;
 //-------------------------------------------------------
 #include "soc/rtc_cntl_reg.h" // Disable brownout problems
@@ -129,10 +129,19 @@ if (flip) rotation = 6; else rotation = 4;//rotation = 4;// or 6 rotate 180
   tft.setBrightness(128);
 
   // screen calibration
+  uint16_t calData[8];
+  pref.begin("touch", false);
   if (digitalRead(SELECTOR_PIN) == LOW) {
-    uint16_t calData[8];
     tft.calibrateTouch(calData, TFT_WHITE, TFT_BLACK, 15);
+    pref.putBytes("calData", calData, sizeof(calData));
+    Serial.println("Touch calibration saved.");
+  } else {
+    if (pref.getBytes("calData", calData, sizeof(calData)) == sizeof(calData)) {
+      tft.setTouchCalibrate(calData);
+      Serial.println("Touch calibration loaded.");
+    }
   }
+  pref.end();
 
   lv_init();// init lvgl
 
