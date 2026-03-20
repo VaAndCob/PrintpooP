@@ -4,14 +4,14 @@
   LovyanGFX configuration for the "Cheap Yellow Display" (CYD)
   This board is an ESP32-2432S028R.
 */
-
+#include "app_config.h"
 #define LGFX_USE_V1
 
 #include <LovyanGFX.hpp>
 
 class LGFX : public lgfx::LGFX_Device {
   // Provide panel parameters
-#if BOARD == USE_CYD_28_1
+#if (BOARD == USE_CYD_28_1)
   lgfx::Panel_ILI9341 _panel_instance;
 #else  // cyd 2.8"
   lgfx::Panel_ILI9341_2 _panel_instance;

@@ -10,7 +10,7 @@
  #
  # Partition scheme: Max App Only (3.9MB)
 **/
-#include "app_config.h" //<- open this file in "include" folder to config compile option
+
 
 //-------------------------------------------------------
 #include <Arduino.h>
